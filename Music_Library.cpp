@@ -53,7 +53,7 @@ int main() {
 }
 
 void Song::Print() const {
-    cout << artist << "     " << name << "     " << genre << endl;
+    cout << artist << " | " << name << " | " << genre << endl;
 }
 
 void console() {
@@ -66,9 +66,9 @@ void console() {
         cout << "   Type '3' to view your songs." << endl;
         cout << "   Type '4' to search for a song." << endl;
         cout << "   Type '5' to sort songs." << endl;
-        cout << "   Type '6' to exit." << endl;
+        cout << "   Type '6' to exit." << endl << endl;
 
-        cout << "Enter an option: " << endl;
+        cout << "Enter an option: ";
         getline(cin, consoleCommand);
 
         if (consoleCommand == "1") {
@@ -116,12 +116,18 @@ void userInputSongs() {
 
         currCount++;
     }
+    cout << endl;
 }
 
 void viewAll() {
+    if (currCount == 0) {
+        cout << "There aren't any songs in your library!" << endl << endl;
+        return;
+    }
     cout << "Here are all your songs!" << endl << endl;
     for (int i = 0; i < currCount; i++) {
         songs[i].Print();
         cout << endl;
     }
+    cout << endl;
 }
