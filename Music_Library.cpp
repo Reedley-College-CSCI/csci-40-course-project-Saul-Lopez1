@@ -36,11 +36,14 @@ private:
     string genre;
 };
 
-Song songs;
-int count = 0;
+
+const int MAX_SIZE = 100;
+int currCount = 0;
+Song songs[MAX_SIZE];
 
 void console();
 void userInputSongs();
+void viewAll();
 
 int main() {
 
@@ -56,17 +59,27 @@ void Song::Print() const {
 void console() {
     string consoleCommand;
 
-    cout << "Options: " << endl;
-    cout << "   Type '1' to add a song." << endl;
-    cout << "   Type '2' to remove a song." << endl;
-    cout << "   Type '3' to view your songs." << endl;
-    cout << "   Type '4' to search for a song." << endl;
-    cout << "   Type '5' to sort songs." << endl;
-    cout << "Enter an option: " << endl;
-    getline(cin, consoleCommand);
+    while (true) {
+        cout << "Options: " << endl;
+        cout << "   Type '1' to add a song." << endl;
+        cout << "   Type '2' to remove a song." << endl;
+        cout << "   Type '3' to view your songs." << endl;
+        cout << "   Type '4' to search for a song." << endl;
+        cout << "   Type '5' to sort songs." << endl;
+        cout << "   Type '6' to exit." << endl;
 
-    if (consoleCommand == "1") {
-        userInputSongs();
+        cout << "Enter an option: " << endl;
+        getline(cin, consoleCommand);
+
+        if (consoleCommand == "1") {
+            userInputSongs();
+        }
+        else if (consoleCommand == "3") {
+            viewAll();
+        }
+        else if (consoleCommand == "6") {
+            break;
+        }
     }
 }
 
@@ -77,25 +90,38 @@ void userInputSongs() {
     const string SENTINEL = "Exit";
 
     while (true) {
+        if (currCount >= MAX_SIZE) {
+            cout << "Your library is full!" << endl;
+            break;
+        }
         cout << "Enter the artist's name (type 'Exit' to stop): " << endl;
         getline(cin, artistName);
 
         if (artistName == SENTINEL) {
             break;
         }
-        songs.SetArtist(artistName);
+        songs[currCount].SetArtist(artistName);
 
         cout << "Enter the song's name: " << endl;
         getline(cin, songName);
-        songs.SetName(songName);
+        songs[currCount].SetName(songName);
 
         cout << "Enter the genre: " << endl;
         getline(cin, genreName);
-        songs.SetGenre(genreName);
+        songs[currCount].SetGenre(genreName);
 
         cout << "Here is your song: " << endl;
-        songs.Print();
+        songs[currCount].Print();
+        cout << endl;
+
+        currCount++;
+    }
+}
+
+void viewAll() {
+    cout << "Here are all your songs!" << endl << endl;
+    for (int i = 0; i < currCount; i++) {
+        songs[i].Print();
         cout << endl;
     }
-    console();
 }
