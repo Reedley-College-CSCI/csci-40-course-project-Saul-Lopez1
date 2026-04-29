@@ -5,7 +5,7 @@
  * This program to build their own music library, with functions such as:
  * adding, removing, viewing, searching for, and sorting songs.
  *
- Each song includes: artist, song, and genre.
+ * Each song includes: artist, song, and genre.
  *
 */
 
@@ -37,17 +37,20 @@ private:
 };
 
 
-const int MAX_SIZE = 100;
+int capacity = 2;
 int currCount = 0;
-Song songs[MAX_SIZE];
+Song* songs = new Song[capacity];
 
 void console();
 void userInputSongs();
 void viewAll();
+void resizeLibrary();
 
 int main() {
 
     console();
+
+    delete[] songs;
 
     return 0;
 }
@@ -61,6 +64,7 @@ void console() {
 
     while (true) {
         cout << "Options: " << endl;
+        cout << "   Type '0' to import songs from a file." << endl;
         cout << "   Type '1' to add a song." << endl;
         cout << "   Type '2' to remove a song." << endl;
         cout << "   Type '3' to view your songs." << endl;
@@ -90,16 +94,23 @@ void userInputSongs() {
     const string SENTINEL = "Exit";
 
     while (true) {
-        if (currCount >= MAX_SIZE) {
+        /*
+        if (currCount >= capacity) {
             cout << "Your library is full!" << endl;
             break;
         }
+        */
         cout << "Enter the artist's name (type 'Exit' to stop): " << endl;
         getline(cin, artistName);
 
         if (artistName == SENTINEL) {
             break;
         }
+
+        if (currCount >= capacity) {
+            resizeLibrary();
+        }
+
         songs[currCount].SetArtist(artistName);
 
         cout << "Enter the song's name: " << endl;
@@ -130,4 +141,19 @@ void viewAll() {
         cout << endl;
     }
     cout << endl;
+}
+
+void resizeLibrary() {
+    int newCapacity = capacity + 100;
+
+    Song* newSongs = new Song[newCapacity];
+
+    for (int i = 0; i < currCount; i++) {
+        newSongs[i] = songs[i];
+    }
+
+    delete[] songs;
+
+    songs = newSongs;
+    capacity = newCapacity;
 }
