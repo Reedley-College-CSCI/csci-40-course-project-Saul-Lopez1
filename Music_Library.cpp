@@ -37,12 +37,13 @@ private:
 };
 
 
-int capacity = 2;
+int capacity = 100;
 int currCount = 0;
 Song* songs = new Song[capacity];
 
 void console();
 void userInputSongs();
+void removeSong();
 void viewAll();
 void resizeLibrary();
 
@@ -78,6 +79,9 @@ void console() {
         if (consoleCommand == "1") {
             userInputSongs();
         }
+        else if (consoleCommand == "2") {
+            removeSong();
+        }
         else if (consoleCommand == "3") {
             viewAll();
         }
@@ -94,12 +98,6 @@ void userInputSongs() {
     const string SENTINEL = "Exit";
 
     while (true) {
-        /*
-        if (currCount >= capacity) {
-            cout << "Your library is full!" << endl;
-            break;
-        }
-        */
         cout << "Enter the artist's name (type 'Exit' to stop): " << endl;
         getline(cin, artistName);
 
@@ -122,10 +120,38 @@ void userInputSongs() {
         songs[currCount].SetGenre(genreName);
 
         cout << "Here is your song: " << endl;
+        cout << currCount + 1 << " | ";
         songs[currCount].Print();
         cout << endl;
 
         currCount++;
+    }
+    cout << endl;
+}
+
+void removeSong() {
+    int songToRemove;
+    const int SENTINEL = -1;
+
+    while (true) {
+        cout << "Enter a song number to remove (Type '-1' to cancel): ";
+        cin >> songToRemove;
+        cin.ignore();
+
+        if (songToRemove == SENTINEL) {
+            break;
+        }
+
+        if ((songToRemove > 0) && (songToRemove <= currCount)) {
+            for (int i = songToRemove - 1; i < currCount; i++) {
+                songs[i] = songs[i + 1];
+            }
+            cout << "Song removed." << endl;
+            currCount--;
+        }
+        else {
+            cout << "Invalid song number." << endl;
+        }
     }
     cout << endl;
 }
@@ -137,6 +163,7 @@ void viewAll() {
     }
     cout << "Here are all your songs!" << endl << endl;
     for (int i = 0; i < currCount; i++) {
+        cout << i + 1 << " | ";
         songs[i].Print();
         cout << endl;
     }
