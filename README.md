@@ -1,10 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Ay551EX-)
-# CS1 Final Project - [Project Title]
+# CS1 Final Project - [Music Library]
 
 ## 1. Overview
 - This program was created to give people a way to store and organize their music library.  
 - It has functions to add, remove, view, search for, sort, and save songs to enable library management and organization.   
-
 
 ---
 
