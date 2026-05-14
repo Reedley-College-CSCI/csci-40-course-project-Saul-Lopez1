@@ -219,13 +219,13 @@ void searchSong() {
         if (searchSelection == "1") {
             cout << "Enter the name of the artist you would like to search for: ";
             getline(cin, userSearch);
-            cout << endl;
+            cout << endl << endl;
 
             for (int i = 0; i < currCount; i++) {
                 if (strstr(songs[i].GetArtist().c_str(), userSearch.c_str()) != nullptr) {
                     cout << i + 1 << " | ";
                     songs[i].Print();
-                    cout << endl;
+                    cout << endl << endl;
                     found = true;
                 }
             }
@@ -233,13 +233,13 @@ void searchSong() {
         else if (searchSelection == "2") {
             cout << "Enter the name of the song you would like to search for: ";
             getline(cin, userSearch);
-            cout << endl;
+            cout << endl << endl;
 
             for (int i = 0; i < currCount; i++) {
                 if (strstr(songs[i].GetName().c_str(), userSearch.c_str()) != nullptr) {
                     cout << i + 1 << " | ";
                     songs[i].Print();
-                    cout << endl;
+                    cout << endl << endl;
                     found = true;
                 }
             }
@@ -247,13 +247,13 @@ void searchSong() {
         else if (searchSelection == "3") {
             cout << "Enter the genre you would like to search for: ";
             getline(cin, userSearch);
-            cout << endl;
+            cout << endl << endl;
 
             for (int i = 0; i < currCount; i++) {
                 if (strstr(songs[i].GetGenre().c_str(), userSearch.c_str()) != nullptr) {
                     cout << i + 1 << " | ";
                     songs[i].Print();
-                    cout << endl;
+                    cout << endl << endl;
                     found = true;
                 }
             }
@@ -307,7 +307,12 @@ void sortSongs() {
                 }
             }
         }
-        cout << "Sorted!" << endl << endl;
+        if (sortSelection != "1" && sortSelection != "2" && sortSelection != "3") {
+            cout << "Invalid input" << endl << endl;
+        }
+        else {
+            cout << "Sorted!" << endl << endl;
+        }
     }
     cout << endl;
 }
