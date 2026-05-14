@@ -56,6 +56,7 @@ void removeSong();
 void viewAll();
 void resizeLibrary();
 void searchSong();
+void sortSongs();
 
 int main() {
 
@@ -97,6 +98,9 @@ void console() {
         }
         else if (consoleCommand == "4") {
             searchSong();
+        }
+        else if (consoleCommand == "5") {
+            sortSongs();
         }
         else if (consoleCommand == "6") {
             break;
@@ -254,10 +258,56 @@ void searchSong() {
                 }
             }
         }
+        else if (searchSelection == "Exit") {
+            break;
+        }
 
         if (!found) {
             cout << "Search target not found." << endl;
         }
         cout << endl;
     }
+}
+
+void sortSongs() {
+    string sortSelection;
+    const string SENTINEL = "Exit";
+
+    while (sortSelection != SENTINEL) {
+        cout << "Type '1' to sort by artist, '2' by song, '3' by genre, or 'Exit' to cancel: ";
+        getline(cin, sortSelection);
+
+        if (sortSelection == "Exit") {
+            cout << endl;
+            break;
+        }
+
+        for (int i = 0; i < currCount - 1; i++) {
+            for (int j = 0; j < currCount - i - 1; j++) {
+                if (sortSelection == "1") {
+                    if (songs[j].GetArtist() > songs[j + 1].GetArtist()) {
+                        Song temp = songs[j];
+                        songs[j] = songs[j + 1];
+                        songs[j + 1] = temp;
+                    }
+                }
+                else if (sortSelection == "2") {
+                    if (songs[j].GetName() > songs[j + 1].GetName()) {
+                        Song temp = songs[j];
+                        songs[j] = songs[j + 1];
+                        songs[j + 1] = temp;
+                    }
+                }
+                else if (sortSelection == "3") {
+                    if (songs[j].GetGenre() > songs[j + 1].GetGenre()) {
+                        Song temp = songs[j];
+                        songs[j] = songs[j + 1];
+                        songs[j + 1] = temp;
+                    }
+                }
+            }
+        }
+        cout << "Sorted!" << endl << endl;
+    }
+    cout << endl;
 }
