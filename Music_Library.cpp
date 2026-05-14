@@ -58,6 +58,9 @@ void viewAll();
 void resizeLibrary();
 void searchSong();
 void sortSongs();
+void save();
+void saveToStorage();
+void saveToLibrary();
 
 int main() {
 
@@ -83,7 +86,8 @@ void console() {
         cout << "   Type '3' to view your songs." << endl;
         cout << "   Type '4' to search for a song." << endl;
         cout << "   Type '5' to sort songs." << endl;
-        cout << "   Type '6' to exit." << endl << endl;
+        cout << "   Type '6' to save your library." << endl;
+        cout << "   Type '7' to exit." << endl << endl;
 
         cout << "Enter an option: ";
         getline(cin, consoleCommand);
@@ -106,6 +110,9 @@ void console() {
             sortSongs();
         }
         else if (consoleCommand == "6") {
+            
+        }
+        else if (consoleCommand == "7") {
             break;
         }
     }
@@ -331,7 +338,7 @@ void sortSongs() {
         cout << "Type '1' to sort by artist, '2' by song, '3' by genre, or 'Exit' to cancel: ";
         getline(cin, sortSelection);
 
-        if (sortSelection == "Exit") {
+        if (sortSelection == SENTINEL) {
             cout << endl;
             break;
         }
@@ -369,4 +376,46 @@ void sortSongs() {
         }
     }
     cout << endl;
+}
+
+void save() {
+    ofstream outFile("Music_Library.txt");
+    string userInput;
+    string SENTINEL = "No";
+
+    while (userInput != SENTINEL) {
+        cout << "Would you like to save your library to your device? ('Yes' to save, 'No' to cancel): ";
+        getline(cin, userInput);
+
+        if (userInput == SENTINEL) {
+            break;
+        }
+
+        if (userInput == "Yes") {
+            for (int i = 0; i < currCount; i++) {
+                outFile << i + 1
+                    << " | " << songs[i].GetArtist()
+                    << " | " << songs[i].GetName()
+                    << " | " << songs[i].GetGenre()
+                    << endl << endl;
+            }
+        }
+        
+        if (userInput != "Yes" && userInput != "No") {
+            cout << "Invalid input!" << endl << endl;
+        }
+        else {
+            cout << "File saved!" << endl << endl;
+        }
+    }
+    outFile.close();
+    cout << endl;
+}
+
+void saveToStorage() {
+
+}
+
+void saveToLibrary() {
+
 }
