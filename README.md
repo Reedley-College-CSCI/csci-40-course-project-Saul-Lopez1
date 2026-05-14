@@ -2,8 +2,9 @@
 # CS1 Final Project - [Project Title]
 
 ## 1. Overview
-- What problem does your project solve?  
-- Briefly describe the purpose and key features of your program.  
+- This program was created to give people a way to store and organize their music library.  
+- It has functions to add, remove, view, search for, sort, and save songs to enable library management and organization.   
+
 
 ---
 
