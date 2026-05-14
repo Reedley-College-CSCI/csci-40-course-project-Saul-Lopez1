@@ -22,11 +22,20 @@ public:
     void SetArtist(string artistName) {
         artist = artistName;
     }
+    string GetArtist() const {
+        return artist;
+    }
     void SetName(string songName) {
         name = songName;
     }
+    string GetName() const {
+        return name;
+    }
     void SetGenre(string genreName) {
         genre = genreName;
+    }
+    string GetGenre() const {
+        return genre;
     }
     void Print() const;
 
@@ -46,6 +55,7 @@ void userInputSongs();
 void removeSong();
 void viewAll();
 void resizeLibrary();
+void searchSong();
 
 int main() {
 
@@ -84,6 +94,9 @@ void console() {
         }
         else if (consoleCommand == "3") {
             viewAll();
+        }
+        else if (consoleCommand == "4") {
+            searchSong();
         }
         else if (consoleCommand == "6") {
             break;
@@ -183,4 +196,61 @@ void resizeLibrary() {
 
     songs = newSongs;
     capacity = newCapacity;
+}
+
+void searchSong() {
+    string searchSelection;
+    string userSearch;
+    bool found = false;
+    
+    cout << "Type '1' to search for artist name, '2' for song name, or '3' for genre: ";
+    getline(cin, searchSelection);
+   
+    if (searchSelection == "1") {
+      cout << "Enter the name of the artist you would like to search for: ";
+      getline(cin, userSearch);
+      cout << endl;
+
+      for (int i = 0; i < currCount; i++) {
+          if (strstr(songs[i].GetArtist().c_str(), userSearch.c_str()) != nullptr) {
+              cout << i + 1 << " | ";
+              songs[i].Print();
+              cout << endl;
+              found = true;
+          }
+      }
+    }
+    else if (searchSelection == "2") {
+        cout << "Enter the name of the song you would like to search for: ";
+        getline(cin, userSearch);
+        cout << endl;
+        
+        for (int i = 0; i < currCount; i++) {
+            if (strstr(songs[i].GetName().c_str(), userSearch.c_str()) != nullptr) {
+                cout << i + 1 << " | ";
+                songs[i].Print();
+                cout << endl;
+                found = true;
+            }
+        }
+    }
+    else if (searchSelection == "3") {
+        cout << "Enter the genre you would like to search for: ";
+        getline(cin, userSearch);
+        cout << endl;
+
+        for (int i = 0; i < currCount; i++) {
+            if (strstr(songs[i].GetGenre().c_str(), userSearch.c_str()) != nullptr) {
+                cout << i + 1 << " | ";
+                songs[i].Print();
+                cout << endl;
+                found = true;
+            }
+        }
+    }
+
+    if (!found) {
+        cout << "Search target not found." << endl;
+    }
+    cout << endl;
 }
