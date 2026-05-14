@@ -379,7 +379,6 @@ void sortSongs() {
 }
 
 void save() {
-    ofstream outFile("Music_Library.txt");
     string userInput;
     string SENTINEL = "No";
 
@@ -392,30 +391,40 @@ void save() {
         }
 
         if (userInput == "Yes") {
-            for (int i = 0; i < currCount; i++) {
-                outFile << i + 1
-                    << " | " << songs[i].GetArtist()
-                    << " | " << songs[i].GetName()
-                    << " | " << songs[i].GetGenre()
-                    << endl << endl;
-            }
+            saveToStorage();
+            saveToLibrary();
         }
         
         if (userInput != "Yes" && userInput != "No") {
             cout << "Invalid input!" << endl << endl;
         }
-        else {
+        else if (userInput == "Yes") {
             cout << "File saved!" << endl << endl;
         }
     }
-    outFile.close();
     cout << endl;
 }
 
 void saveToStorage() {
+    ofstream outFile("Library_Storage.txt");
 
+    for (int i = 0; i < currCount; i++) {
+        outFile << songs[i].GetArtist() << endl
+            << songs[i].GetName() << endl
+            << songs[i].GetGenre() << endl;
+    }
+    outFile.close();
 }
 
 void saveToLibrary() {
+    ofstream outFile("Music_Library.txt");
 
+    for (int i = 0; i < currCount; i++) {
+        outFile << i + 1
+            << " | " << songs[i].GetArtist()
+            << " | " << songs[i].GetName()
+            << " | " << songs[i].GetGenre()
+            << endl << endl;
+    }
+    outFile.close();
 }
