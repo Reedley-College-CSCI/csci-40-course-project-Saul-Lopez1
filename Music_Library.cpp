@@ -12,7 +12,6 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#include <iomanip>
 #include <fstream>
 
 using namespace std;
@@ -110,7 +109,7 @@ void console() {
             sortSongs();
         }
         else if (consoleCommand == "6") {
-            
+            save();
         }
         else if (consoleCommand == "7") {
             break;
@@ -264,7 +263,7 @@ void resizeLibrary() {
 }
 
 void searchSong() {
-    string searchSelection;
+    string searchSelection = "";
     string userSearch;
     const string SENTINEL = "Exit";
     
@@ -331,7 +330,7 @@ void searchSong() {
 }
 
 void sortSongs() {
-    string sortSelection;
+    string sortSelection = "";
     const string SENTINEL = "Exit";
 
     while (sortSelection != SENTINEL) {
@@ -400,6 +399,7 @@ void save() {
         }
         else if (userInput == "Yes") {
             cout << "File saved!" << endl << endl;
+            break;
         }
     }
     cout << endl;
