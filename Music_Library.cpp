@@ -51,6 +51,7 @@ int currCount = 0;
 Song* songs = new Song[capacity];
 
 void console();
+void importSongs();
 void userInputSongs();
 void removeSong();
 void viewAll();
@@ -86,8 +87,10 @@ void console() {
 
         cout << "Enter an option: ";
         getline(cin, consoleCommand);
-
-        if (consoleCommand == "1") {
+        if (consoleCommand == "0") {
+            importSongs();
+        }
+        else if (consoleCommand == "1") {
             userInputSongs();
         }
         else if (consoleCommand == "2") {
@@ -106,6 +109,57 @@ void console() {
             break;
         }
     }
+}
+
+void importSongs() {
+    ifstream inFile("Library_Storage.txt");
+    string documentInput;
+    string userInput;
+
+    cout << "Would you like to import song from a file into the console?"
+        << "Anything you have input into the console will be overwritten (Type 'Yes' to proceed or 'No' to cancel): ";
+    
+    while (getline(cin, userInput)) {
+        if (userInput == "Yes") {
+            cout << "Reading the file..." << endl;
+            currCount = 0;
+            break;
+        }
+        else if (userInput == "No") {
+            cout << "Exiting..." << endl;
+            break;
+        }
+        else {
+            cout << "Invalid input. Try again: ";
+        }
+    }
+    cout << endl;
+    
+
+    while (getline(inFile, documentInput)) {
+        if (userInput == "No") {
+            break;
+        }
+        if (currCount >= capacity) {
+            resizeLibrary();
+        }
+
+        string fileName;
+        string fileGenre;
+
+        songs[currCount].SetArtist(documentInput);
+        getline(inFile, fileName);
+        songs[currCount].SetName(fileName);
+        getline(inFile, fileGenre);
+        songs[currCount].SetGenre(fileGenre);
+
+        currCount++;
+    }
+    if (userInput == "Yes" && currCount != 0) {
+        cout << "The file was read and songs were imported!" << endl;
+    }
+    inFile.close();
+    cout << endl;
 }
 
 void userInputSongs() {
