@@ -26,8 +26,7 @@
 
 ## 4. Technical Walkthrough
 - Walking through the program, it starts off with the menu displayed to the user. From there, they can either import their songs from the text file or manually add them into the console. With some songs now in the console, the user has several ways they can manipulate them. They can use the view option to see everything they have, they can remove songs by index number, sort songs alphabetically by the artist, song name, or genre, and search for songs. After editing their library, the user has the option to save it to the text file, or they can exit without saving to discard the changes.  
-- **Include a link to your required video demonstration** showcasing how the project works (**3-7 minutes**). 
-    Make sure it shareable without approval needed.
+- https://youtu.be/ZZNwg-lexDI
 
 ---
 
