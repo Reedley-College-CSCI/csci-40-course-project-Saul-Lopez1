@@ -2,7 +2,7 @@
 // Author: [Saul Lopez]
 
 /* Description:
- * This program to build their own music library, with functions such as:
+ * This program is for users to build their own music library, with functions such as:
  * adding, removing, viewing, searching for, and sorting songs.
  *
  * Each song includes: artist, song, and genre.
@@ -114,6 +114,9 @@ void console() {
         else if (consoleCommand == "7") {
             break;
         }
+        else {
+            cout << "Invalid option, please try again." << endl << endl;
+        }
     }
 }
 
@@ -122,7 +125,7 @@ void importSongs() {
     string documentInput;
     string userInput;
 
-    cout << "Would you like to import song from a file into the console?"
+    cout << "Would you like to import song from a file into the console? "
         << "Anything you have input into the console will be overwritten (Type 'Yes' to proceed or 'No' to cancel): ";
     
     while (getline(cin, userInput)) {
@@ -321,7 +324,6 @@ void searchSong() {
         else if (searchSelection == "Exit") {
             break;
         }
-
         if (!found) {
             cout << "Search target not found." << endl;
         }
