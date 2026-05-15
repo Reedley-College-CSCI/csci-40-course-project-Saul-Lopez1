@@ -18,30 +18,7 @@
 
 ## 3. Testing Summary
 - **Structured Testing Log:**
-Test      Description             Input            Expected Output               Actual Output        Pass/Fail
-Case
-ID
-----------------------------------------------------------------------------------------------------------------
-TC-01     Add a new song          Artist: "Naoki   Song appears                 Song appears          P
-          (valid input)           Hashimoto",      in library                   in library
-                                  Song: 
-                                  "Storyteller"
-                                  Genre: "Rock"
-
-TC-02     Invalid menu option     "9"              Program loops and asks       Program loops and     P
-          (invalid input)                          for input again              asks for input again
-
-TC-03     Searching for existing  "Naoki           All songs from artist        All songs from        P
-          artist (searching)      Hashimoto"       displayed                    artist displayed
-
-TC-04     Save and load from      Save, restart,   Same songs appear after      Same songs appear     P
-          file (data              import file      import                       after import
-          persistence)
-
-TC-05     Remove with invalid     "999"            "Invalid song number."       "Invalid song         P
-          index (additional)                                                     number."
-
-
+  Included as file due to formatting.
 - I tested by making different sets of songs and running them through the program, using the different functions several times.  
 - Inputting something other than one of the listed numbers to control the menu makes it loop until a valid input is entered. An invalid input to import, search, or save songs also causes the program to loop until a valid input is entered.  
 
